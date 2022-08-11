@@ -12,5 +12,6 @@ class Settings(BaseSettings):
 
     class Config:
         env_file=".env"
+
 settings = Settings()
-print(settings.database_password)
+# print(settings.database_password)
