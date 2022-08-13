@@ -1,7 +1,7 @@
 version: "3"
 services:
   api:
-    image: tltest/fastapi-app
+    image: sloppynetworks/fastapi-app
     ports:
       - 80:8000
     environment:
