@@ -1,8 +1,9 @@
 name: GitHub Actions Demo
+
 on: [push, pull_request]
 
 jobs:
-  job1:
+  build:
     environment:
       name: testing
     env:
@@ -14,9 +15,9 @@ jobs:
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM: ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
-    
+
     services:
-      postgres: 
+      postgres:
         image: postgres
         env:
           POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
@@ -28,22 +29,19 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-          
     runs-on: ubuntu-latest
     steps:
       - name: pulling git repo
-        uses: actions/checkout@v3
-      - name: Install Python
-        uses: actions/setup-python@v4
+        uses: actions/checkout@v2
+      - name: Install python version 3.9
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
-      - name: Update pip
+          python-version: "3.9"
+      - name: update pip
         run: python -m pip install --upgrade pip
-      - name: Ininstall all denpendencies
+      - name: install all dependencies
         run: pip install -r requirements.txt
       - name: test with pytest
         run: |
           pip install pytest
-          pip install requests
           pytest
-    
