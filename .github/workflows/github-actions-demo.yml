@@ -1,0 +1,11 @@
+name: GitHub Actions Demo
+on: [push, pull_request]
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pulling git repo
+        uses: actions/checkout@v2
+      - name: say hi to myself
+        run: echo "hello tianxin"
